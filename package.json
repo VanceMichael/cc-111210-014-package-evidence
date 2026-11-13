@@ -10,6 +10,8 @@
     "build": "node scripts/check.mjs",
     "test": "node --test test/*.test.mjs",
     "demo": "node src/demo.mjs",
+    "license-demo": "node src/license-demo.mjs",
+    "license:collect": "node src/license-cli.mjs",
     "start": "node src/main.mjs",
     "source": "node fixtures/main.mjs"
   },

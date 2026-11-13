@@ -35,3 +35,13 @@ export async function get(base, path) {
   if (!response.ok) throw new Error(`来源返回 ${response.status}`);
   return response;
 }
+
+// 用于锁文件中完整 resolved URL 的获取，同样强制回环/协议约束。
+export async function getUrl(href) {
+  const url = new URL(href);
+  if (!['http:', 'https:'].includes(url.protocol)) throw new Error('不支持的协议');
+  if (!['127.0.0.1', 'localhost', '[::1]'].includes(url.hostname)) throw new Error('演练源只允许本地地址');
+  const response = await fetch(url, { signal: AbortSignal.timeout(10000) });
+  if (!response.ok) throw new Error(`来源返回 ${response.status}`);
+  return response;
+}
